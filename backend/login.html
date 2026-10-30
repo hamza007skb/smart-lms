@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial; padding: 50px;">
+
+    <h2>Get My Token (Login)</h2>
+    
+    <label>Email:</label><br>
+    <input type="email" id="email" value="ali@student.com" style="width: 300px; margin-bottom: 15px;"><br>
+
+    <label>Password:</label><br>
+    <input type="password" id="password" value="password123" style="width: 300px; margin-bottom: 15px;"><br>
+
+    <button onclick="login()" style="padding: 10px 20px; background: green; color: white;">Log In & Get Token</button>
+
+    <div style="margin-top: 20px;">
+        <strong>Your Fresh Token:</strong>
+        <textarea id="tokenDisplay" style="width: 100%; height: 100px; margin-top: 10px;" readonly></textarea>
+    </div>
+
+    <script>
+        async function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Change /api/auth/login if your login route is named something else!
+                const response = await fetch('http://localhost:5000/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+                
+                if (data.token) {
+                    document.getElementById('tokenDisplay').value = data.token;
+                } else {
+                    document.getElementById('tokenDisplay').value = "Login failed: " + JSON.stringify(data);
+                }
+            } catch (error) {
+                document.getElementById('tokenDisplay').value = "Error: " + error.message;
+            }
+        }
+    </script>
+</body>
+</html>

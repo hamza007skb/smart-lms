@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --plum-50:  #f7f4f9;
+  --plum-100: #ede7f5;
+  --plum-200: #d9ccea;
+  --plum-300: #bea8d8;
+  --plum-400: #9f7fc0;
+  --plum-500: #7f5aa5;
+  --plum-600: #5e3f7e;
+  --plum-700: #4a2f65;
+  --plum-800: #3a234f;
+  --plum-900: #2b173b;
+  --plum-950: #1a0d24;
+
+  --off-white: #f9f8f6;
+  --cream:     #f2f0eb;
+  --warm-gray: #e8e4de;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--off-white);
+  color: #1a0d24;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: 'DM Serif Display', serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--plum-300); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--plum-500); }
+
+/* Drag-drop zone animation */
+@keyframes pulse-border {
+  0%, 100% { border-color: #bea8d8; }
+  50%       { border-color: #7f5aa5; }
+}
+
+.drag-active {
+  animation: pulse-border 1.2s ease-in-out infinite;
+  background-color: #f7f4f9;
+}
+
+/* Page transition */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-enter {
+  animation: fadeUp 0.35s ease-out forwards;
+}
+
+/* Badge pulse for high similarity */
+@keyframes badge-alert {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+.badge-danger-pulse {
+  animation: badge-alert 2s ease-in-out infinite;
+}

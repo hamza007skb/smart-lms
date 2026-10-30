@@ -1,0 +1,41 @@
+# ========================
+# Node.js & React (Frontend & Backend)
+# ========================
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build output
+dist/
+build/
+
+# ========================
+# Python (AI Engine)
+# ========================
+__pycache__/
+*.py[cod]
+*$py.class
+**/.venv/
+env/
+.env_ai
+
+
+# ========================
+# Environment Variables & Secrets
+# ========================
+.env
+.env.local
+
+# ========================
+# Specific Project Files (Academica LMS)
+# ========================
+# Ignore local PDF uploads so you don't share student test data!
+uploads/submissions/*
+# (Optional) Keep the folder structure by adding a blank .gitkeep file inside it
+!uploads/submissions/.gitkeep
+
+# ========================
+# OS Generated Files
+# ========================
+.DS_Store
+Thumbs.db

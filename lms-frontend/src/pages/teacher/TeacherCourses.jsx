@@ -1,0 +1,8 @@
+import {useEffect,useState} from 'react';
+import {Link} from 'react-router-dom';
+import {useAuth} from '../../context/AuthContext';
+export default function TeacherCourses(){
+ const {authFetch}=useAuth();const [courses,setCourses]=useState([]);const [loading,setLoading]=useState(true);const [error,setError]=useState('');
+ useEffect(()=>{(async()=>{try{const res=await authFetch('/api/courses/teacher');const data=await res.json();if(!res.ok)throw Error(data.message);setCourses(data);}catch(e){setError(e.message);}finally{setLoading(false);}})();},[authFetch]);
+ return <div className="max-w-5xl"><h1 className="font-serif text-4xl mb-2">My courses</h1><p className="text-gray-500 mb-8">Courses and credit hours are assigned by your administrator.</p>{error&&<p role="alert" className="text-red-700 mb-4">{error}</p>}{loading?<p>Loading courses…</p>:!courses.length?<div className="bg-white border border-dashed rounded-xl p-10 text-center">No courses assigned yet. Contact your administrator.</div>:<div className="space-y-4">{courses.map(c=><div key={c._id} className="bg-white border rounded-xl p-6 flex flex-wrap justify-between gap-4 items-center"><div><h2 className="font-serif text-xl">{c.code?`${c.code} · `:''}{c.name}</h2><p className="text-sm text-gray-500 mt-2">{c.semester?.name||'Semester not assigned'} · {c.creditHours||3} credit hours · {c.students?.length||0}/{c.capacity||50} students · {c.status}</p></div><div className="flex items-center gap-5"><div><p className="text-xs text-gray-500">Join code</p><p className="font-mono font-bold">{c.joinCode}</p></div><Link className="border border-purple-200 text-purple-900 rounded-lg px-4 py-2" to={`/teacher/course/${c._id}`}>Manage course</Link></div></div>)}</div>}</div>;
+}
